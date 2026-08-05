@@ -1,6 +1,6 @@
 # Contributors
 
-## Ashley Indakwa
+## Indakwa Ashley W
 GitHub: @ashleyindakwa08-ctrl
 
 Role:
@@ -45,7 +45,7 @@ Role:
 ---
 
 ## Brian
-GitHub: @username
+GitHub: @brianmutinda298-ops
 
 Role:
 - Create Sports Discussion Posts
@@ -67,4 +67,3 @@ Role:
 - Final Checklist
 - Documentation
 - README Review
-
