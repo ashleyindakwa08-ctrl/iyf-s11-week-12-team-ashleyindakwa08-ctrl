@@ -10,44 +10,61 @@ Role:
 - Bug Fixing
 - Deployment
 
+---
 
-## Izokizing
+## Isaac
 GitHub: @Izokizing
 
 Role:
 - User Registration and Login
 
+---
 
-## Member 3
-GitHub: @username
+## Emmanuel
+GitHub: @Manu-debug-hub
+
+Role:
+- Responsive Design
+
+---
+
+## Willan
+GitHub: @WillanWaish
 
 Role:
 - User Profiles (View and Edit Profile)
 
+---
 
-## Member 4
+## Collins
+GitHub: @kole16
+
+Role:
+- Display Posts (Home Feed and Individual Post Page)
+
+---
+
+## Brian
 GitHub: @username
 
 Role:
 - Create Sports Discussion Posts
 
+---
 
-## Member 5
-GitHub: @username
-
-Role:
-- Display Posts (Home Feed and Individual Post Page)
-
-
-## Member 6
+## Freddie
 GitHub: @username
 
 Role:
 - Comments System
 
+---
 
-## Member 7
-GitHub: @username
+## Sophia
+GitHub: @Sophia
 
 Role:
-- Responsive Design
+- Final Checklist
+- Documentation
+- README Review
+
