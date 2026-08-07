@@ -1,7 +1,42 @@
+import { useState } from "react";
 import "./Auth.css";
-import "./Auth.js";
+
 
 function Auth() {
+  const [username, setUsername] = usestate("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const signup = () => {
+    if (!username || !email || !password || !confirmPassword) {
+      alert("Please fill in all fields.");
+      return;
+    }
+    if (!email.icludes("@")) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+    if (password.length < 8) {
+      alert("Password must be at least 8 characters long.");
+      return;
+    }
+    if (password !== confirmPassword) {
+      alert("Password do not match.");
+      return;
+    }
+    console.log("New User Registered");
+    console.log(username, email, password);
+
+    alert("Account created successfully!");
+  };
+  const loginin = () => {
+    if (!email || !password) {
+      alert("Please enter your email and password.");
+      return;
+    }
+    console.log (email, password);
+    alert("Login successful!");
+  };
   return (
     <div className="container" id="container">
         <div className="form-container sign-up">
@@ -16,9 +51,26 @@ function Auth() {
                     <a href="#"><i className="fab fa-github"></i></a>
                 </div>
                 <span>or use your email for registration</span>
-                <input type="text" id="signInName" placeholder="Name" />
-                <input type="email" id="signInemail" placeholder="Email" />
-                <input type="password" id="signInPassword" placeholder="Password" />
+                <input 
+                  type="text" id="signInName" 
+                  placeholder="Name"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+                <input 
+                  type="email" 
+                  id="signInemail"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  />
+                <input
+                  type="password"
+                  id="signInPassword"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  />
                 <button type="button" onClick={signup}>Sign Up</button>
             </form>
         </div>
@@ -34,7 +86,7 @@ function Auth() {
                     <a href="#"><i className="fab fa-instagram"></i></a>
                     <a href="#"><i className="fab fa-github"></i></a>
                 </div>
-                <span>or use your email password</span>
+                <span>or use your email password to login.</span>
                 <input type="email" id="loginEmail" placeholder="Email" />
                 <input type="password" id="loginPassword" placeholder="Password" />
                 <a href="#">Forgot your password?</a>
