@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./Auth.css";
+import { loginUser, registerUser } from "./api";
 
 
 function Auth() {
