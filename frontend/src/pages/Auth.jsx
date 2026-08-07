@@ -29,7 +29,7 @@ function Auth() {
 
     alert("Account created successfully!");
   };
-  const loginin = () => {
+  const login = () => {
     if (!email || !password) {
       alert("Please enter your email and password.");
       return;
