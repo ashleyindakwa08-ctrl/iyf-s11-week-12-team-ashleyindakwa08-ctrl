@@ -1,2 +1,12 @@
-POST /api/auth/register
-POST /api/auth/login
+const express = required("express");
+const router = express.Router();
+
+ const {
+   register,
+   login
+ } = required("../controllers/authController");
+
+router.post("/register", register);
+router.post("/login", login);
+
+module.exports = router;
