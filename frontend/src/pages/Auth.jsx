@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./Auth.css";
-import { loginUser, registerUser } from "./api";
+import { loginUser, registerUser } from "../api";
 
 function Auth() {
   const [isActive, setIsActive] = useState(false);
@@ -126,7 +126,7 @@ function Auth() {
           <button type="button" onClick={login}>Sign In</button>
 
           <p className="mobile-switch">
-            Don&apos;t have an account?{" "}
+            Don\'t have an account?{" "}
             <a onClick={() => setIsActive(true)}>Sign up</a>
           </p>
         </form>
