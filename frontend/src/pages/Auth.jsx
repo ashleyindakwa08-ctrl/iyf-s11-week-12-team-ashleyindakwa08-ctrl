@@ -126,7 +126,7 @@ function Auth() {
           <button type="button" onClick={login}>Sign In</button>
 
           <p className="mobile-switch">
-            Don\'t have an account?{" "}
+            Don&apos;t have an account?{" "}
             <a onClick={() => setIsActive(true)}>Sign up</a>
           </p>
         </form>
