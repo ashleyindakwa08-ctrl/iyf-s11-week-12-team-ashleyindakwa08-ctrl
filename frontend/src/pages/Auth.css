@@ -215,3 +215,62 @@ body{
 .container.active .toggle-right{
     transform: translateX(200%);
 }
+@media (max-width: 650px) {
+  body {
+    height: auto;
+    min-height: 100vh;
+    padding: 20px 0;
+  }
+
+  .container {
+    width: 90%;
+    min-height: 600px;
+    height: auto;
+  }
+
+  .form-container {
+    width: 100%;
+    left: 0;
+    padding: 0 25px;
+  }
+
+  .sign-in,
+  .sign-up {
+    width: 100%;
+  }
+
+  .container.active .sign-in {
+    transform: none;
+    opacity: 0;
+    z-index: 1;
+  }
+
+  .container.active .sign-up {
+    transform: none;
+    opacity: 1;
+    z-index: 5;
+  }
+
+  .toggle-container {
+    display: none;
+  }
+}
+
+.mobile-switch {
+  display: none;
+  margin-top: 15px;
+  font-size: 13px;
+}
+
+.mobile-switch a {
+  color: #6c63ff;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+@media (max-width: 650px) {
+  .mobile-switch {
+    display: block;
+  }
+      }
