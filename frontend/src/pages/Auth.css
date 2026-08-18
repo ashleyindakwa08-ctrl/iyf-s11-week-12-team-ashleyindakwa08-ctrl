@@ -281,3 +281,11 @@ body{
         display: block;
     }
 }
+
+
+.auth-error {
+    color: #e63946;
+    font-size: 12px;
+    margin: 4px 0;
+    text-align: center;
+}
