@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Auth.css";
-import { loginUser, registerUser } from "../api";
+import { useAuth } from "../context/AuthContext";
 
 function Auth() {
   const [isActive, setIsActive] = useState(false);
+  const navigate = useNavigate();
+  const { login, register } = useAuth();
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -13,42 +16,63 @@ function Auth() {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
-  const signup = () => {
+  const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const signup = async () => {
+    setError("");
+
     if (!username || !email || !password || !confirmPassword) {
-      alert("Please fill in all fields.");
+      setError("Please fill in all fields.");
       return;
     }
     if (!email.includes("@")) {
-      alert("Please enter a valid email address.");
+      setError("Please enter a valid email address.");
       return;
     }
     if (password.length < 8) {
-      alert("Password must be at least 8 characters long.");
+      setError("Password must be at least 8 characters long.");
       return;
     }
     if (password !== confirmPassword) {
-      alert("Passwords do not match.");
+      setError("Passwords do not match.");
       return;
     }
-    console.log("New User Registered");
-    console.log(username, email, password);
 
-    alert("Account created successfully!");
+    setIsSubmitting(true);
+    try {
+      await register({ username, email, password });
+      navigate("/");
+    } catch (err) {
+      setError(err.message || "Registration failed. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  const login = () => {
+  const login_ = async () => {
+    setError("");
+
     if (!loginEmail || !loginPassword) {
-      alert("Please enter your email and password.");
+      setError("Please enter your email and password.");
       return;
     }
-    console.log(loginEmail, loginPassword);
-    alert("Login successful!");
+
+    setIsSubmitting(true);
+    try {
+      await login({ email: loginEmail, password: loginPassword });
+      navigate("/");
+    } catch (err) {
+      setError(err.message || "Login failed. Please check your credentials.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <div className={`container ${isActive ? "active" : ""}`} id="container">
       <div className="form-container sign-up">
-        <form>
+        <form onSubmit={(e) => e.preventDefault()}>
           <h1>Create Account</h1>
           <div className="social-icons">
             <a href="#"><i className="fab fa-facebook-f"></i></a>
@@ -87,17 +111,22 @@ function Auth() {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
-          <button type="button" onClick={signup}>Sign Up</button>
+
+          {isActive && error && <p className="auth-error">{error}</p>}
+
+          <button type="button" onClick={signup} disabled={isSubmitting}>
+            {isSubmitting ? "Creating account..." : "Sign Up"}
+          </button>
 
           <p className="mobile-switch">
             Already have an account?{" "}
-            <a onClick={() => setIsActive(false)}>Sign in</a>
+            <a onClick={() => { setIsActive(false); setError(""); }}>Sign in</a>
           </p>
         </form>
       </div>
 
       <div className="form-container sign-in">
-        <form>
+        <form onSubmit={(e) => e.preventDefault()}>
           <h1>Sign In</h1>
           <div className="social-icons">
             <a href="#"><i className="fab fa-facebook-f"></i></a>
@@ -123,11 +152,16 @@ function Auth() {
             onChange={(e) => setLoginPassword(e.target.value)}
           />
           <a href="#">Forgot your password?</a>
-          <button type="button" onClick={login}>Sign In</button>
+
+          {!isActive && error && <p className="auth-error">{error}</p>}
+
+          <button type="button" onClick={login_} disabled={isSubmitting}>
+            {isSubmitting ? "Signing in..." : "Sign In"}
+          </button>
 
           <p className="mobile-switch">
             Don&apos;t have an account?{" "}
-            <a onClick={() => setIsActive(true)}>Sign up</a>
+            <a onClick={() => { setIsActive(true); setError(""); }}>Sign up</a>
           </p>
         </form>
       </div>
@@ -140,7 +174,7 @@ function Auth() {
             <button
               className="toggle-button"
               id="signIn"
-              onClick={() => setIsActive(false)}
+              onClick={() => { setIsActive(false); setError(""); }}
             >
               Sign In
             </button>
@@ -152,7 +186,7 @@ function Auth() {
             <button
               className="hidden"
               id="register"
-              onClick={() => setIsActive(true)}
+              onClick={() => { setIsActive(true); setError(""); }}
             >
               Sign Up
             </button>
