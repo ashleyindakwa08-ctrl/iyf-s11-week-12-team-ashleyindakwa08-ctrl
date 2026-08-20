@@ -289,3 +289,20 @@ body{
     margin: 4px 0;
     text-align: center;
 }
+
+
+@media (max-width: 400px) {
+  .social-icons a {
+    height: 34px;
+    width: 34px;
+    margin: 0 2px;
+  }
+
+  .container button {
+    width: 100%;
+    padding: 12px 0;
+  }
+
+  .container input {
+    font-size: 16px;
+  }
