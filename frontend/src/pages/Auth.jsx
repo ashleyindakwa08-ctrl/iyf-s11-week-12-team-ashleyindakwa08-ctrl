@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import "./Auth.css";
 import { useAuth } from "../context/AuthContext";
 
+import {registerUser,loginUser} from "../api.js";
+
+
 function Auth() {
   const [isActive, setIsActive] = useState(false);
   const navigate = useNavigate();
@@ -41,7 +44,7 @@ function Auth() {
 
     setIsSubmitting(true);
     try {
-      await register({ username, email, password });
+      await registerUser({ username, email, password });
       navigate("/");
     } catch (err) {
       setError(err.message || "Registration failed. Please try again.");
@@ -60,7 +63,7 @@ function Auth() {
 
     setIsSubmitting(true);
     try {
-      await login({ email: loginEmail, password: loginPassword });
+      await loginUser({ email: loginEmail, password: loginPassword });
       navigate("/");
     } catch (err) {
       setError(err.message || "Login failed. Please check your credentials.");

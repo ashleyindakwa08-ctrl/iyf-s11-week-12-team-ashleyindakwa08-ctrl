@@ -1,35 +1,39 @@
-const express = require("express");
-const cors = require("cors");
-require("dotenv").config();
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import connectDB from "./config/db.js";
+import authRoutes from "./routes/auth.js";
 
-
-
-const connectDB = require("./config/db");
-
-// Routes
-const postRoutes = require("./routes/postRoutes");
+dotenv.config();
 
 const app = express();
 
+// Connect to MongoDB
 connectDB();
 
+// Middleware
+app.use(cors({
+  origin: "*",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
 
-
-app.use(cors());
 app.use(express.json());
 
-// Health check route
-app.get("/api/health", (req, res) => {
-    res.json({
-        status: "ok",
-        message: "CommunityHub API running"
-    });
+// Routes
+app.use("/api/auth", authRoutes);
+
+// Test route
+app.get("/", (req, res) => {
+  res.json({
+    status: "ok",
+    message: "CommunityHub API running"
+  });
 });
 
 // Server port
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5175;
 
-// Start server
 app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
